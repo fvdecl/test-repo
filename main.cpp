@@ -154,6 +154,30 @@ bool test_is_red_doji()
   return !candle.is_red();
 }
 
+//is_green: свеча с close > open зеленая
+bool test_is_green_green_candle()
+{
+  Candle candle{ 100.0, 120.0, 90.0, 110.0 };
+
+  return candle.is_green();
+}
+
+//is_green: красная свеча (close < open) не зеленая
+bool test_is_green_red_candle()
+{
+  Candle candle{ 110.0, 120.0, 90.0, 100.0 };
+
+  return !candle.is_green();
+}
+
+//is_green: доджи (open == close) не зеленая, сравнение строгое
+bool test_is_green_doji()
+{
+  Candle candle{ 100.0, 110.0, 90.0, 100.0 };
+
+  return !candle.is_green();
+}
+
 void initTests()
 {
   tests.push_back(test1);
@@ -174,6 +198,9 @@ void initTests()
   tests.push_back(test_is_red_red_candle);
   tests.push_back(test_is_red_green_candle);
   tests.push_back(test_is_red_doji);
+  tests.push_back(test_is_green_green_candle);
+  tests.push_back(test_is_green_red_candle);
+  tests.push_back(test_is_green_doji);
   //tests.push_back(test4);
   //tests.push_back(test5);
 }
