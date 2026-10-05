@@ -30,11 +30,40 @@ bool test3()
   return candle.high == 3.0;
 }
 
+//body_contains: цена внутри тела зеленой свечи
+bool test_body_contains_price_inside_body()
+{
+  Candle candle{ 100.0, 120.0, 90.0, 110.0 };
+
+  return candle.body_contains(105.0);
+}
+
+//body_contains: цена в тенях свечи не входит в тело
+bool test_body_contains_price_in_shadows()
+{
+  Candle candle{ 100.0, 120.0, 90.0, 110.0 };
+
+  return !candle.body_contains(115.0)
+      && !candle.body_contains(95.0);
+}
+
+//body_contains: границы тела красной свечи (open и close) входят в тело
+bool test_body_contains_red_candle_body_bounds()
+{
+  Candle candle{ 110.0, 120.0, 90.0, 100.0 };
+
+  return candle.body_contains(110.0)
+      && candle.body_contains(100.0);
+}
+
 void initTests()
 {
   tests.push_back(test1);
   tests.push_back(test2);
   tests.push_back(test3);
+  tests.push_back(test_body_contains_price_inside_body);
+  tests.push_back(test_body_contains_price_in_shadows);
+  tests.push_back(test_body_contains_red_candle_body_bounds);
   //tests.push_back(test4);
   //tests.push_back(test5);
 }
