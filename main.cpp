@@ -106,6 +106,30 @@ bool test_full_size_red_candle()
   return candle.full_size() == 30.0;
 }
 
+//body_size: размер тела зеленой свечи равен close - open, тени не учитываются
+bool test_body_size_green_candle()
+{
+  Candle candle{ 100.0, 120.0, 90.0, 110.0 };
+
+  return candle.body_size() == 10.0;
+}
+
+//body_size: у доджи (open == close) тело нулевое, несмотря на тени
+bool test_body_size_doji_is_zero()
+{
+  Candle candle{ 100.0, 110.0, 90.0, 100.0 };
+
+  return candle.body_size() == 0.0;
+}
+
+//body_size: у красной свечи (close < open) размер тела положительный
+bool test_body_size_red_candle()
+{
+  Candle candle{ 110.0, 120.0, 90.0, 100.0 };
+
+  return candle.body_size() == 10.0;
+}
+
 void initTests()
 {
   tests.push_back(test1);
@@ -120,6 +144,9 @@ void initTests()
   tests.push_back(test_full_size_green_candle);
   tests.push_back(test_full_size_flat_candle_is_zero);
   tests.push_back(test_full_size_red_candle);
+  tests.push_back(test_body_size_green_candle);
+  tests.push_back(test_body_size_doji_is_zero);
+  tests.push_back(test_body_size_red_candle);
   //tests.push_back(test4);
   //tests.push_back(test5);
 }
