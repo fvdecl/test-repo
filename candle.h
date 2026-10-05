@@ -8,10 +8,10 @@ using Price = double;
 struct Candle
 {
 public:
-	Price open;
-	Price high;
-	Price low;
-	Price close;
+	Price open{};
+	Price high{};
+	Price low{};
+	Price close{};
 
 public:
 	Candle() = default;

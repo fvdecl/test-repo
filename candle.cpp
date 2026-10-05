@@ -1,5 +1,6 @@
 ﻿#include "candle.h"
 
+#include <cmath>
 #include <string>
 #include <stdexcept>
 
