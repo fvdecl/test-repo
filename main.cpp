@@ -82,6 +82,30 @@ bool test_contains_high_and_low_bounds()
       && candle.contains(90.0);
 }
 
+//full_size: размер зеленой свечи равен high - low (тело и обе тени)
+bool test_full_size_green_candle()
+{
+  Candle candle{ 100.0, 120.0, 90.0, 110.0 };
+
+  return candle.full_size() == 30.0;
+}
+
+//full_size: у свечи, где все цены равны, размер нулевой
+bool test_full_size_flat_candle_is_zero()
+{
+  Candle candle{ 100.0, 100.0, 100.0, 100.0 };
+
+  return candle.full_size() == 0.0;
+}
+
+//full_size: у красной свечи размер положительный и не зависит от цвета
+bool test_full_size_red_candle()
+{
+  Candle candle{ 110.0, 120.0, 90.0, 100.0 };
+
+  return candle.full_size() == 30.0;
+}
+
 void initTests()
 {
   tests.push_back(test1);
@@ -93,6 +117,9 @@ void initTests()
   tests.push_back(test_contains_price_in_shadow);
   tests.push_back(test_contains_price_outside_candle);
   tests.push_back(test_contains_high_and_low_bounds);
+  tests.push_back(test_full_size_green_candle);
+  tests.push_back(test_full_size_flat_candle_is_zero);
+  tests.push_back(test_full_size_red_candle);
   //tests.push_back(test4);
   //tests.push_back(test5);
 }
