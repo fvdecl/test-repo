@@ -56,6 +56,32 @@ bool test_body_contains_red_candle_body_bounds()
       && candle.body_contains(100.0);
 }
 
+//contains: цена в тени (вне тела) входит в свечу
+bool test_contains_price_in_shadow()
+{
+  Candle candle{ 100.0, 120.0, 90.0, 110.0 };
+
+  return candle.contains(115.0);
+}
+
+//contains: цена за пределами high и low не входит в свечу
+bool test_contains_price_outside_candle()
+{
+  Candle candle{ 100.0, 120.0, 90.0, 110.0 };
+
+  return !candle.contains(121.0)
+      && !candle.contains(89.0);
+}
+
+//contains: цена ровно на high и low входит в свечу
+bool test_contains_high_and_low_bounds()
+{
+  Candle candle{ 100.0, 120.0, 90.0, 110.0 };
+
+  return candle.contains(120.0)
+      && candle.contains(90.0);
+}
+
 void initTests()
 {
   tests.push_back(test1);
@@ -64,6 +90,9 @@ void initTests()
   tests.push_back(test_body_contains_price_inside_body);
   tests.push_back(test_body_contains_price_in_shadows);
   tests.push_back(test_body_contains_red_candle_body_bounds);
+  tests.push_back(test_contains_price_in_shadow);
+  tests.push_back(test_contains_price_outside_candle);
+  tests.push_back(test_contains_high_and_low_bounds);
   //tests.push_back(test4);
   //tests.push_back(test5);
 }
